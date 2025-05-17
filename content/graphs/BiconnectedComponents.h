@@ -19,35 +19,34 @@
  */
 #pragma once
 
-vi num, st;
+vi tin, st;
 vector<vector<pii>> ed;
 int Time;
 template<class F>
-int dfs(int at, int par, F& f) {
-	int me = num[at] = ++Time, top = me;
-	for (auto [y, e] : ed[at]) if (e != par) {
-		if (num[y]) {
-			top = min(top, num[y]);
-			if (num[y] < me)
+int dfs(int cur, int par, F& f) {
+	int me = tin[cur] = ++Time, low = me;
+	for (auto [nxt, e] : ed[cur]) if (e != par) {
+		if (tin[nxt]) {
+			low = min(low, tin[nxt]);
+			if (tin[nxt] < me)
 				st.push_back(e);
 		} else {
 			int si = sz(st);
-			int up = dfs(y, e, f);
-			top = min(top, up);
-			if (up == me) {
+			int up = dfs(nxt, e, f);
+			low = min(low, up);
+			if (up >= me) { // e is a bridge if up > me
 				st.push_back(e);
 				f(vi(st.begin() + si, st.end()));
 				st.resize(si);
 			}
-			else if (up < me) st.push_back(e);
-			else { /* e is a bridge */ }
+			else st.push_back(e);
 		}
 	}
-	return top;
+	return low;
 }
 
 template<class F>
 void bicomps(F f) {
-	num.assign(sz(ed), 0);
-	rep(i,0,sz(ed)) if (!num[i]) dfs(i, -1, f);
+	tin.assign(sz(ed), 0);
+	rep(i,0,sz(ed)) if (!tin[i]) dfs(i, -1, f);
 }
