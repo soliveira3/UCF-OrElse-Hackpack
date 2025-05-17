@@ -9,19 +9,20 @@
 #pragma once
 
 int max_right(int l, auto g) {
+	assert(g(ego()));
 	l += size;
 	dip push(l >> i);
 	S sm = ego();
 	do {
-	while (l % 2 == 0) l /= 2;
-	if (!g(op(sm, d[l]))) {
-		while (l < size) {
-			push(l);
-			if (g(op(sm, d[l *= 2]))) sm = op(sm, d[l++]);
+		while (l % 2 == 0) l /= 2;
+		if (!g(op(sm, d[l]))) {
+			while (l < size) {
+				push(l);
+				if (g(op(sm, d[l *= 2]))) sm = op(sm, d[l++]);
+			}
+			return l - size;
 		}
-		return l - size;
-	}
-	sm = op(sm, d[l++]);
+		sm = op(sm, d[l++]);
 	} while ((l & -l) != l);
 	return n;
 }
