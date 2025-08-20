@@ -51,16 +51,16 @@ Dynamic programming
 	Longest increasing subsequence
 	Number of paths in a dag
 	Shortest path in a dag
-	Dynprog over intervals
-	Dynprog over subsets
-	Dynprog over probabilities
-	Dynprog over trees
+	DP over intervals
+	DP over subsets
+	DP over probabilities
+	DP over trees
 	3^n set cover
 	Divide and conquer
 	Knuth optimization
 	Convex hull optimizations
 	RMQ (sparse table a.k.a 2^k-jumps)
-	Bitonic cycle
+	BiTonic cycle
 	Log partitioning (loop over most restricted)
 Combinatorics
 	Computation of binomial coefficients
@@ -101,7 +101,7 @@ Probability theory
 Optimization
 	Binary search
 	Ternary search
-	Unimodality and convex functions
+	UniModality and convex functions
 	Binary search on derivative
 Numerical methods
 	Numeric integration
@@ -121,7 +121,7 @@ Geometry
 	Polygon cut
 	Closest pair
 	Coordinate-compression
-	Quadtrees
+	Quad-trees
 	KD-trees
 	All segment-segment intersection
 Sweeping
@@ -147,13 +147,13 @@ Combinatorial search
 	Bidirectional search
 	Iterative deepening DFS / A*
 Data structures
-	LCA (2^k-jumps in trees in general)
+	LCA - Binary Lifting
 	Pull/push-technique on trees
 	Heavy-light decomposition
 	Centroid decomposition
 	Lazy propagation
 	Self-balancing trees
-	Convex hull trick (wcipeg.com/wiki/Convex_hull_trick)
+	Convex hull trick
 	Monotone queues / monotone stacks / sliding queues
 	Sliding queue using 2 stacks
 	Persistent segment tree

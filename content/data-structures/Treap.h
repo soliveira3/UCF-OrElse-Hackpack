@@ -1,7 +1,7 @@
 /**
- * Author: Tyler M
- * Date: 02/02/2024
- * Source: CP-Algorithms
+ * Author: someone on Codeforces
+ * Date: 2017-03-14
+ * Source: folklore
  * Description: A short self-balancing tree. It acts as a
  *  sequential container with log-time splits/joins, and
  *  is easy to augment with additional data.
@@ -10,44 +10,56 @@
  */
 #pragma once
 
-struct node {
-	int val, prior, sz = 1;
-	node *left = nullptr, *right = nullptr;
-	node(int val = 0): val(val), prior(rand()) {}
+struct Node {
+	Node *l = 0, *r = 0;
+	int val, y, c = 1;
+	Node(int val) : val(val), y(rand()) {}
+	void recalc();
 };
 
-int getSz(node *cur) { return cur ? cur->sz : 0; }
-void recalc(node *cur) { cur->sz = getSz(cur->left) + getSz(cur->right) + 1; }
+int cnt(Node* n) { return n ? n->c : 0; }
+void Node::recalc() { c = cnt(l) + cnt(r) + 1; }
 
-pair<node*, node*> split(node *cur, int v) {
-	if(!cur) return {nullptr, nullptr};
-	node *left, *right;
-	if(getSz(cur->left) >= v) {
-		right = cur;
-		auto [L, R] = split(cur->left, v);
-		left = L, right->left = R;
-		recalc(right);
-	}
-	else {
-		left = cur;
-		auto [L, R] = split(cur->right, v - getSz(cur->left) - 1);
-		left->right = L, right = R;
-		recalc(left);
-	} 
-	return {left, right};
+template<class F> void each(Node* n, F f) {
+	if (n) { each(n->l, f); f(n->val); each(n->r, f); }
 }
 
-node* merge(node *t1, node *t2) {
-	if(!t1 || !t2) return t1 ? t1 : t2;
-	node *res;
-	if(t1->prior > t2->prior) {
-		res = t1;
-		res->right = merge(t1->right, t2);
+pair<Node*, Node*> split(Node* n, int k) {
+	if (!n) return {};
+	if (cnt(n->l) >= k) { // "n->val >= k" for lower_bound(k)
+		auto [L,R] = split(n->l, k);
+		n->l = R;
+		n->recalc();
+		return {L, n};
+	} else {
+		auto [L,R] = split(n->r,k - cnt(n->l) - 1); // and just "k"
+		n->r = L;
+		n->recalc();
+		return {n, R};
 	}
-	else {
-		res = t2;
-		res->left = merge(t1, t2->left);
+}
+
+Node* merge(Node* l, Node* r) {
+	if (!l) return r;
+	if (!r) return l;
+	if (l->y > r->y) {
+		l->r = merge(l->r, r);
+		return l->recalc(), l;
+	} else {
+		r->l = merge(l, r->l);
+		return r->recalc(), r;
 	}
-	recalc(res);
-	return res;
+}
+
+Node* ins(Node* t, Node* n, int pos) {
+	auto [l,r] = split(t, pos);
+	return merge(merge(l, n), r);
+}
+
+// Example application: move the range [l, r) to index k
+void move(Node*& t, int l, int r, int k) {
+	Node *a, *b, *c;
+	tie(a,b) = split(t, l); tie(b,c) = split(b, r - l);
+	if (k <= l) t = merge(ins(a, b, k), c);
+	else t = merge(a, ins(c, b, k - r));
 }

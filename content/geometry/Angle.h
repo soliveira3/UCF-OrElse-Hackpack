@@ -27,6 +27,7 @@ struct Angle {
 	Angle t180() const { return {-x, -y, t + half()}; }
 	Angle t360() const { return {x, y, t + 1}; }
 };
+
 bool operator<(Angle a, Angle b) {
 	// add a.dist2() and b.dist2() to also compare distances
 	return make_tuple(a.t, a.half(), a.y * (ll)b.x) <

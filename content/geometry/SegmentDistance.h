@@ -6,6 +6,8 @@
  * Description:\\
 \begin{minipage}{75mm}
 Returns the shortest distance between point p and the line segment from point s to e.
+For SEGMENT-SEGMENT DISTANCE, check for intersection.
+If there is no intersection, the closest distance is between one of the four points and the other segment.
 \end{minipage}
 \begin{minipage}{15mm}
 \vspace{-10mm}

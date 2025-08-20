@@ -1,31 +1,69 @@
 /**
- * Author: Lucian Bicsi
- * Date: 2017-10-31
- * License: CC0
- * Source: folklore
- * Description: Zero-indexed max-tree. Bounds are inclusive to the left and exclusive to the right.
- * Can be changed by modifying T, f and unit.
- * Time: O(\log N)
- * Status: stress-tested
+ * Author: Samuel Oliveira
+ * Date: 2025-08-17
+ * Description: General Segment Tree with functionality for common problems.
  */
-#pragma once
 
-struct Tree {
-	typedef int T;
-	static constexpr T unit = INT_MIN;
-	T f(T a, T b) { return max(a, b); } // (any associative fn)
-	vector<T> s; int n;
-	Tree(int n = 0, T def = unit) : s(2*n, def), n(n) {}
-	void update(int pos, T val) {
-		for (s[pos += n] = val; pos /= 2;)
-			s[pos] = f(s[pos * 2], s[pos * 2 + 1]);
-	}
-	T query(int b, int e) { // query [b, e)
-		T ra = unit, rb = unit;
-		for (b += n, e += n; b < e; b /= 2, e /= 2) {
-			if (b % 2) ra = f(ra, s[b++]);
-			if (e % 2) rb = f(s[--e], rb);
-		}
-		return f(ra, rb);
-	}
-};
+typedef struct Tree
+{
+    ll size;
+    vll vals;
+    ll NEUTRAL_ELEMENT = 0;
+    ll f(ll a, ll b) { return a + b; }
+
+    void init(ll n) {
+        size = 1;
+        while (size < n) size *= 2;
+        vals.assign(2 * size, 0LL);
+    }
+
+    void build(vll &a, ll x, ll lx, ll rx) {
+        if (lx + 1 == rx) {
+            if (lx < (ll)a.size()) vals[x] = a[lx];
+            return;
+        }
+        ll m = (lx + rx) / 2;
+        build(a, 2 * x + 1, lx, m);
+        build(a, 2 * x + 2, m, rx);
+        vals[x] = f(vals[2 * x + 1], vals[2 * x + 2]);
+    }
+
+    void set(ll i, ll v, ll x, ll lx, ll rx) {
+        if (lx + 1 == rx) {
+            vals[x] = v;
+            return;
+        }
+        ll m = (lx + rx) / 2;
+        if (i < m) set(i, v, 2 * x + 1, lx, m);
+        else set(i, v, 2 * x + 2, m, rx);
+        vals[x] = f(vals[2 * x + 1], vals[2 * x + 2]);
+    }
+
+    ll calc(ll l, ll r, ll x, ll lx, ll rx) {
+        if (lx >= r || l >= rx) return NEUTRAL_ELEMENT;
+        if (lx >= l && rx <= r) return vals[x];
+        ll m = (lx + rx) / 2;
+        ll s1 = calc(l, r, 2 * x + 1, lx, m);
+        ll s2 = calc(l, r, 2 * x + 2, m, rx);
+        return f(s1, s2);
+    }
+
+    ll findKth(ll k, ll x, ll lx, ll rx) {
+        if (lx + 1 == rx) return lx;
+        ll m = (lx + rx) / 2;
+        ll sl = vals[2*x + 1];
+        if (k < sl) return findKth(k, 2*x + 1, lx, m);
+        else return findKth(k-sl, 2*x + 2, m, rx);
+    }
+
+    ll first_above(ll v, ll l, ll x, ll lx, ll rx) {
+        if (vals[x] < v) return -1;
+        if (rx <= l) return -1;
+        if (rx - lx == 1) return lx;
+        ll m = (lx + rx) / 2;
+        ll res = first_above(v, l, 2*x + 1, lx, m);
+        if (res == -1) res = first_above(v, l, 2*x + 2, m, rx);
+        return res;
+    }
+
+} Tree;

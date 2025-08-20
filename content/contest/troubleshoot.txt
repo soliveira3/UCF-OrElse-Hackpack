@@ -1,9 +1,9 @@
 Pre-submit:
-Write a few simple test cases if sample is not enough.
-Are time limits close? If so, generate max cases.
-Is the memory usage fine?
-Could anything overflow?
-Make sure to submit the right file.
+    Write a few test cases
+    INCLUDE MAX CASES.
+    Is memory fine?
+    Overflow?
+    Correct file?
 
 Wrong answer:
 Print your solution! Print debug output, as well.

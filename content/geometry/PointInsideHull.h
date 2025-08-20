@@ -18,15 +18,15 @@
 
 typedef Point<ll> P;
 
-bool inHull(const vector<P>& l, P p, bool strict = true) {
-	int a = 1, b = sz(l) - 1, r = !strict;
-	if (sz(l) < 3) return r && onSegment(l[0], l.back(), p);
-	if (sideOf(l[0], l[a], l[b]) > 0) swap(a, b);
-	if (sideOf(l[0], l[a], p) >= r || sideOf(l[0], l[b], p)<= -r)
+bool inHull(const vector<P>& h, P p, bool strict = true) {
+	int a = 1, b = sz(h) - 1, r = !strict;
+	if (sz(h) < 3) return r && onSegment(h[0], h.back(), p);
+	if (sideOf(h[0], h[a], h[b]) > 0) swap(a, b);
+	if (sideOf(h[0], h[a], p) >= r || sideOf(h[0], h[b], p)<= -r)
 		return false;
 	while (abs(a - b) > 1) {
 		int c = (a + b) / 2;
-		(sideOf(l[0], l[c], p) > 0 ? b : a) = c;
+		(sideOf(h[0], h[c], p) > 0 ? b : a) = c;
 	}
-	return sgn(l[a].cross(l[b], p)) < r;
+	return sgn(h[a].cross(h[b], p)) < r;
 }
