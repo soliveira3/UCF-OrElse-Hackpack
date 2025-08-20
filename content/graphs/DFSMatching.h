@@ -3,7 +3,7 @@
  * Date: 2009-10-28
  * License: CC0
  * Source:
- * Description: Simple bipartite matching algorithm. Graph $g$ should be a list
+ * Description: Maximum bipartite matching algorithm. Graph $g$ should be a list
  * of neighbors of the left partition, and $btoa$ should be a vector full of
  * -1's of the same size as the right partition. Returns the size of
  * the matching. $btoa[i]$ will be the match for vertex $i$ on the right side,
@@ -24,6 +24,7 @@ bool find(int j, vector<vi>& g, vi& btoa, vi& vis) {
 		}
 	return 0;
 }
+
 int dfsMatching(vector<vi>& g, vi& btoa) {
 	vi vis;
 	rep(i,0,sz(g)) {

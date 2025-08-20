@@ -12,6 +12,8 @@
  * initialized to the segtree default. Root must be 0.
  * Time: O((\log N)^2)
  * Status: stress-tested against old HLD
+ * Usage: Maximum Values on path from any two arbitrary nodes
+ * For node to root, use Euler Tour
  */
 #pragma once
 

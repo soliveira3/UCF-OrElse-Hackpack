@@ -17,8 +17,8 @@
  * Time: O(N+E), where N is the number of boolean variables, and E is the number of clauses.
  * Status: stress-tested
  */
-#pragma once
 
+#pragma once
 struct TwoSat {
 	int N;
 	vector<vi> gr;
