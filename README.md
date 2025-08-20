@@ -3,7 +3,7 @@
 This repo hosts KACTL, [KTH](https://en.wikipedia.org/wiki/KTH_Royal_Institute_of_Technology)'s ICPC team reference document.
 It consists of 25 pages of copy-pasteable C++ code, for use in ICPC-style programming competitions.
 
-See [kactl.pdf](./kactl.pdf) for the final, browsable version, and [content/](./content/) for raw source code.
+See [hackpack.pdf](./hackpack.pdf) for the final, browsable version, and [content/](./content/) for raw source code.
 
 ## Aspirations
 
@@ -28,7 +28,7 @@ For nicer alignment you might want to insert `\hardcolumnbreak`, `\columnbreak` 
 though this is usually only done before important contests, and not on the main branch.
 The algorithms that are not included in the pdf are left commented out in `chapter.tex`.
 
-To build KACTL, type `make kactl` (or `make fast`) on a \*nix machine -- this will update `kactl.pdf`.
+To build KACTL, type `make hackpack` (or `make fast`) on a \*nix machine -- this will update `hackpack.pdf`.
 (Windows might work as well, but is not tested.) `doc/README` has a few more notes about this.
 
 Tips:
@@ -50,8 +50,8 @@ Each algorithm contains a header with the author of the code, the date it
 was added, a description of the algorithm, its testing status, and preferably also
 source, license and time complexity.
 
-kactl.pdf is to be kept to 25 pages + cover page.
-Occasionally the generated kactl.pdf is committed to the repo for convenience, but not too often because it makes git operations slower.
+hackpack.pdf is to be kept to 25 pages + cover page.
+Occasionally the generated hackpack.pdf is committed to the repo for convenience, but not too often because it makes git operations slower.
 
 ## Testing
 
