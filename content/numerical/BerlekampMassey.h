@@ -16,9 +16,9 @@
 
 #include "../number-theory/ModPow.h"
 
-vector<ll> berlekampMassey(vector<ll> s) {
+vll berlekampMassey(vll s) {
 	int n = sz(s), L = 0, m = 0;
-	vector<ll> C(n), B(n), T;
+	vll C(n), B(n), T;
 	C[0] = B[0] = 1;
 
 	ll b = 1;

@@ -3,6 +3,7 @@
  * License: CC0
  * Description: z[i] computes the length of the longest common prefix of s[i:] and s,
  * except z[0] = 0. (abacaba -> 0010301)
+ * Used for Finding Periods CSES
  * Time: O(n)
  * Status: stress-tested
  */
