@@ -2,6 +2,7 @@
  * Author: Samuel Oliveira
  * Date: 2025-08-17
  * Description: General Segment Tree with functionality for common problems.
+ * Usage: set(i, v, 0, 0, SIZE)
  */
 
 typedef struct Tree
@@ -65,5 +66,6 @@ typedef struct Tree
         if (res == -1) res = first_above(v, l, 2*x + 2, m, rx);
         return res;
     }
+
 
 } Tree;
