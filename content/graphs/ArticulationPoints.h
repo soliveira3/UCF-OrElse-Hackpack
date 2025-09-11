@@ -6,11 +6,9 @@
 
 int n;
 vector<vector<int>> adj;
-
 vector<bool> visited;
 vector<int> tin, low;
 int timer;
-
 void dfs(int v, int p = -1) {
     visited[v] = true;
     tin[v] = low[v] = timer++;
@@ -27,16 +25,13 @@ void dfs(int v, int p = -1) {
             ++children;
         }
     }
-    if(p == -1 && children > 1)
-        // V IS A CUTPOINT;
+    if(p == -1 && children > 1) // V IS A CUTPOINT;
 }
-
 void findAP() {
     timer = 0;
     visited.assign(n, false);
     tin.assign(n, -1);
     low.assign(n, -1);
     for (int i = 0; i < n; ++i)
-        if (!visited[i])
-            dfs (i);
+        if (!visited[i]) dfs (i);
 }
