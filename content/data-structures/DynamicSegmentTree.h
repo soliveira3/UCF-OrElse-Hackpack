@@ -8,12 +8,7 @@ struct Node {
     ll lo, hi;
     ll val = 0;
     Node *left = nullptr, *right = nullptr;
-
-    Node(ll lb, ll rb) {
-        lo = lb;
-        hi = rb;
-    }
-
+    Node(ll lo, ll hi) : lo(lo), hi(hi) {}
     void extend() {
         if (!left && lo + 1 < hi) {
             ll t = (lo + hi) / 2;
@@ -21,7 +16,6 @@ struct Node {
             right = new Node(t, hi);
         }
     }
-
     void add(ll k, ll x) {
         extend();
         val += x;
@@ -30,7 +24,6 @@ struct Node {
             else right->add(k, x);
         }
     }
-
     ll get_sum(ll lq, ll rq) {
         if (lq <= lo && hi <= rq) return val;
         if (max(lo, lq) >= min(hi, rq)) return 0;

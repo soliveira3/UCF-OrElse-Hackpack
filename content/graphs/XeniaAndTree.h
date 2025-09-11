@@ -15,32 +15,24 @@
  * Each query should return min((distNode to centroid) + minDistSpecialNodeFromCentroid) for each parant centroid
  */
 
-// in fixed length paths    
+// in fixed length paths
 int getSize(int u, int p)
-int findCentroid(int u, int p, int n) {} 
+int findCentroid(int u, int p, int n) {}
 
-void getDist(ll u, ll p, ll c, ll d)
-{
+void getDist(ll u, ll p, ll c, ll d) {
     for (int v : adj[u])
         if (v != p && !removed[v])
             getDist(v, u, c, d+1);
- 
     ancestors[u].push_back({c, d});
 }
-
-int buildDecomp(int node)
-{
+int buildDecomp(int node) {
     int centroid = findCentroid(node, -1, getSize(node, -1));
-
     for (int v : adj[centroid])
         if (!removed[v])
             getDist(v, centroid, centroid, 1);
- 
     ancestors[centroid].push_back({centroid, 0});
     removed[centroid] = true;
- 
     for (int v : adj[centroid])
         if (!removed[v]) buildDecomp(v);
- 
     return centroid;
 }
