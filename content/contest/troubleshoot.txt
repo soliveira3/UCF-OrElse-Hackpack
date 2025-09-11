@@ -1,13 +1,10 @@
 Pre-submit:
-
     Write a few test cases
     INCLUDE MAX CASES.
     Is memory fine?
     Overflow?
     Correct file?
-
 Wrong answer:
-
     Print your solution + Print debug
     Clearing all structures between test cases?
     Can your code handle the whole input range?
@@ -29,9 +26,7 @@ Wrong answer:
     Go for a small walk, e.g. to the toilet.
     Is your output format correct? (whitespace)
     You/Teammate rewrite solution from the start
-
 Runtime error:
-
     Have you tested all corner cases locally?
     Any uninitialized variables?
     Are you reading or writing outside of range?
@@ -41,17 +36,13 @@ Runtime error:
     Any possible infinite recursion?
     Invalidated pointers or iterators?
     Are you using too much memory?
-
 Time limit exceeded:
-
     Do you have any possible infinite loops?
     What is the complexity of your algorithm?
     Are you copying a lot of unnecessary data?
     How big is the input and output?
     Avoid vector, map. (use arrays/unordered_map)
     What do your teammates think about your algorithm?
-
 Memory limit exceeded:
-
     Max amount of memory your code should need?
     Clearing all data structures between test cases?

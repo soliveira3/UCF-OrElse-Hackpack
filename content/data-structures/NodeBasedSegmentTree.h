@@ -4,7 +4,7 @@
  */
 
 struct node {
-    pll val = {LLONG_MAX, LLONG_MAX};
+    pll val = {inf, inf};
     ll lo, hi, mid;
     node *left = nullptr, *right = nullptr;
     node (ll l, ll h) : lo(l), hi(h) {
@@ -21,7 +21,7 @@ struct node {
         merge();
     }
     pll query(ll l, ll r) {
-        if (r <= lo || l >= hi) return { LLONG_MAX, LLONG_MAX };
+        if (r <= lo || l >= hi) return {inf,inf};
         if (lo >= l && hi <= r) return val;
         return min(left->query(l, r), right->query(l, r));
     }
