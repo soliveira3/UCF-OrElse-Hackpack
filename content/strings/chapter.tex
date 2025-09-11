@@ -1,54 +1,5 @@
 \chapter{Strings}
 
-
-\section{Applications of String Functions}
-
-{\scriptsize
-\subsection*{\small{Searching for a Sub-string in a String (KMP)}}
-\begin{itemize}
-    \item Concatenate the sub-string to the beginning of the string plus another character that does not occur in either string.
-    \item Run the prefix function on the string and count the number of occurrences of the length of the original sub-string.
-\end{itemize}
-
-\subsection*{\small{Counting the Number of Prefixes in a String}}
-\begin{itemize}
-    \item Run the prefix function on the string.
-    \item For each string of length $i$, do:
-        \text{ans[pi[i-1]] += ans[i]}
-    since each occurrence of a longer prefix implies the occurrence of the shorter prefix.
-    \item Add one for each original (non-counted) prefix.
-
-    vll ans(n+1, 1); // Set to one for the actual prefix
-    for (int i = 0; i < n; i++) ans[pi[i]]++;
-    for (int i = n-1; i > 0; i--) ans[pi[i-1]] += ans[i];
-\end{itemize}
-
-
-\subsection*{\small{The Number of Different Substrings in a String}}
-\begin{itemize}
-    \item Start with an empty string.
-    \item Add the next character of the original string to our string and reverse the string.
-    \item Run the prefix function to find the max length of the substrings we have already found.
-    \item The number of new substrings = accumulate$(|S| + 1 - \text{maxPi})$.
-\end{itemize}
-
-\subsection*{\small{Compressing a String}}
-\begin{itemize}
-    \item Given a string $s$ of length $n$, we want to find the shortest ``compressed'' representation of the string.
-    \item If after running the prefix function, $n$ is divisible by $(n - \text{pi[n-1]})$, then the string is compressible, with minimum size $(n - \text{pi[n-1]})$.
-    \item Otherwise, it is not compressible.
-\end{itemize}
-
-\subsection*{\small{Creating Automation for String Matching}}
-\begin{itemize}
-    \item After running the prefix function on one or many strings, an automation should be able to preprocess the strings in $O(n)$ and then do matching in $O(m)$ per query.
-    \item This is especially useful for \textbf{many repeated searches} with the same pattern (KMP runs in $O(n+m)$ per query).
-    \item Build a table storing \texttt{aut[state][charNumber]}, where \texttt{state} is the index of the string we are searching for and \texttt{char} is the current character.
-    \item Depending on the character we see, move forwards or backwards to a new state (e.g., seeing an \texttt{a} moves us from state 1 → 2, but seeing a \texttt{b} moves us from state 2 → 0).
-\end{itemize}
-}
-
-
 % Import KACTL snippets
 \kactlimport{MatchingAutomation.h}
 \kactlimport{KMP.h}

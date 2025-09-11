@@ -5,9 +5,7 @@ using namespace std;
 #define sz(x) (ll) x.size()
 typedef long long ll;
 typedef vector<ll> vll;
-
-int main()
-{
+int main() {
     cin.tie(0)->sync_with_stdio(0);
     cin.exceptions(cin.failbit);
 }
